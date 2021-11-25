@@ -1,9 +1,8 @@
-# PubSub_UofG_Project
-A simple PubSub system
+# Final Project in University of Glasgow
 
 
 
-## For Virtual Environment
+## For Python Virtual Environment
 ```
-conda create -n PubSub_UofG_Project python=3.8
+conda create -n Project python=3.8
 ```
