@@ -15,7 +15,7 @@ import os
 
 ### Settings here
 
-BROKER_ADDRESS = '68.183.42.204'
+BROKER_ADDRESS = '68.183.43.204'
 REQUEST_TYPE = 'MQTT'
 MESSAGE_PUB_TYPE = 'PUB'
 MESSAGE_SUB_TYPE = 'SUB'
@@ -161,7 +161,7 @@ class Exec_Experiment_1(User):
 
     
     def on_connect(client, userdata, flags, rc, props=None):
-         fire_locust_success(
+        fire_locust_success(
             request_type=REQUEST_TYPE,
             name='connect',
             response_time=0,
