@@ -3,7 +3,7 @@ from locust import Locust, User, TaskSet, event, events, task, between
 from locust.user.users import UserMeta
 import paho.mqtt.client as mqtt
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 import time
 import random
@@ -15,7 +15,7 @@ import os
 
 ### Settings here
 
-BROKER_ADDRESS = '192.168.56.101'
+BROKER_ADDRESS = '68.183.42.204'
 REQUEST_TYPE = 'MQTT'
 MESSAGE_PUB_TYPE = 'PUB'
 MESSAGE_SUB_TYPE = 'SUB'
@@ -134,7 +134,7 @@ class Experiment_1(TaskSet):
             REQUEST_TYPE, 0, topic, payload, self.start_time, PUBLISH_TIMEOUT, self.client_id
         )
         MQTTMessageInfo.wait_for_publish()
-        # self.client.disconnect()
+        self.client.disconnect()
         self.client.loop_stop()
         # time.sleep(1)
         ### PUB END
@@ -208,4 +208,4 @@ class Exec_Experiment_4(User):
 
 
 if __name__ == '__main__':
-    os.system("locust -f .\experiments.py Exec_Experiment_1 -u 10 -r 1 --host=192.168.56.101")
+    os.system("locust -f .\experiments.py Exec_Experiment_1 -u 10 -r 1 --host=" + BROKER_ADDRESS)
