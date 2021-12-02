@@ -9,6 +9,7 @@ import time
 import random
 import os
 
+
 # load env variables (old method)
 # load_dotenv()
 # broker_address = os.getenv("broker_address")
@@ -111,8 +112,9 @@ class Experiment_1(TaskSet):
         self.client.connect(host=BROKER_ADDRESS, port=1883, keepalive=60)
         # self.client.disconnect()
 
-    @task
-    def PubSub_task(self):
+    # Task Weight 50%
+    @task(1)
+    def Pub_task(self):
 
         ### PUB
         # self.client.reconnect()
@@ -138,13 +140,8 @@ class Experiment_1(TaskSet):
         self.client.loop_stop()
         # time.sleep(1)
         ### PUB END
-
-        ### SUB
-        
-
-        ### SUB END
     # wait_time = between(0.5, 10)
-        
+
 class Exec_Experiment_1(User):
     tasks = {Experiment_1}
     def __init__(self, *args, **kwargs):
@@ -153,12 +150,15 @@ class Exec_Experiment_1(User):
         increment()
         client_name = "Device - " + str(COUNTClient)
         self.client = mqtt.Client(client_name)
+        self.client.on_message = self.on_message
         self.client.on_connect = self.on_connect
         self.client.on_disconnect = self.on_disconnect
         self.client.on_publish = self.on_publish
         self.client.pubmessage  = {}
 
-
+    # abandoned
+    def on_message(client, userdata, message):
+        print("SUB: Msg:{} Response_time: ".format(str(message.payload.decode("UTF-8"))))
     
     def on_connect(client, userdata, flags, rc, props=None):
         fire_locust_success(
