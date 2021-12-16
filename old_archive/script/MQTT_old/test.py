@@ -10,7 +10,7 @@ import paho.mqtt.client as mqtt
 
 ### Settings here
 
-BROKER_ADDRESS = '192.168.56.101'
+BROKER_ADDRESS = '68.183.43.204'
 REQUEST_TYPE = 'MQTT'
 MESSAGE_PUB_TYPE = 'PUB'
 MESSAGE_SUB_TYPE = 'SUB'
@@ -28,11 +28,9 @@ class test_1(TaskSet):
     """
     def on_start(self):
     # self.client_name = "TEST_1_Single_Publisher"
-        self.client = mqtt.Client('TEST_1_Single_Publisher')
+        # self.client = mqtt.Client('TEST_1_Single_Publisher')
         self.client.connect(host=BROKER_ADDRESS, port=1883, keepalive=60)
 
-
-    
     @task(1)
     def pub(self):
         self.client.loop_start()
@@ -52,7 +50,7 @@ class testTask(User):
         # print(args)
         # print(kwargs)
 
-        # self.client = mqtt.Client()
+        self.client = mqtt.Client('TEST_1_Single_Publisher')
         # self.client.on_connect = self.on_connect()
         self.client.on_publish = self.on_publish()
         self.client.on_message = self.on_message()
@@ -69,4 +67,4 @@ class testTask(User):
         pass
 
 if __name__ == '__main__':
-    os.system(r'locust -f .\test.py -u 10 -r 1 --host=192.168.56.101')
+    os.system(r'locust -f .\test.py -u 10 -r 1 --host=' + BROKER_ADDRESS)

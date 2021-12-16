@@ -4,8 +4,8 @@ import time
 
 # mqttBroker ="mqtt.eclipseprojects.io" 
 
-mqttBroker ="192.168.56.101"
-client = mqtt.Client("Temperature_Inside")
+mqttBroker ='68.183.43.204'
+client = mqtt.Client("MQTT_EXPERIMENT_1")
 client.connect(mqttBroker)
 
 
